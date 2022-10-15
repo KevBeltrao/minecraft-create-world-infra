@@ -13,9 +13,9 @@ module "ec2" {
   }]
   vpc_security_group_ids = [module.sg.security_group_id]
 
-  create_spot_instance = var.use_spot
-  spot_type            = "one-time"
-
+  create_spot_instance      = var.use_spot
+  spot_type                 = "one-time"
+  spot_wait_for_fulfillment = true
 }
 
 resource "aws_eip" "this" {

@@ -30,6 +30,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | Public IP of the server | `any` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | AWS region to create the resources. | `string` | `"us-east-1"` | no |
 | <a name="input_server_disk_size"></a> [server\_disk\_size](#input\_server\_disk\_size) | Disk size of the server in GiB. | `number` | `50` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | Name of the EC2 instance to be created. | `string` | n/a | yes |
