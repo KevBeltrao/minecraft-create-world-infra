@@ -44,6 +44,10 @@ jobs:
           terraform_version: 1.2.4
           terraform_wrapper: false
 
+      - name: Init Terraform
+        working-directory: terraform
+        run: terraform init
+
       - name: Automatically create a Markdown docs for Terraform
         uses: terraform-docs/gh-actions@v1.0.0
         with:
