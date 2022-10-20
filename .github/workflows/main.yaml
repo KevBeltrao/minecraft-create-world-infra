@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup Golang
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.19.1"
+
+      - name: Check security problems using gosec
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          go install github.com/securego/gosec/v2/cmd/gosec@v2
+          gosec ./tests
+
+      - name: Apply Golint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: 'latest'
+          working-directory: tests
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.4
+          terraform_wrapper: false
+
+      - name: Automatically create a Markdown docs for Terraform
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: terraform
+          output-method: replace
+          git-push: "true"
+
+      - name: Run Terratest tests
+        working-directory: tests
+        run: go test
+
+      - name: Check if Dockerfile changed
+        uses: dorny/paths-filter@v2
+        id: changes_on_base_docker_image
+        with:
+          filters: |
+            src:
+              - 'Dockerfile'
+
+      - name: Check if image can be build docker
+        if: steps.changes_on_base_docker_image.outputs.src == 'true'
+        run: docker build -t minecraft .

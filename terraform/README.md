@@ -16,8 +16,8 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ec2"></a> [ec2](#module\_ec2) | git@github.com:terraform-aws-modules/terraform-aws-ec2-instance.git | v4.1.4 |
-| <a name="module_sg"></a> [sg](#module\_sg) | git@github.com:terraform-aws-modules/terraform-aws-security-group.git | v4.13.1 |
+| <a name="module_ec2"></a> [ec2](#module\_ec2) | github.com/terraform-aws-modules/terraform-aws-ec2-instance.git | v4.1.4 |
+| <a name="module_sg"></a> [sg](#module\_sg) | github.com/terraform-aws-modules/terraform-aws-security-group.git | v4.13.1 |
 
 ## Resources
 
@@ -30,7 +30,6 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | Public IP of the server | `any` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | AWS region to create the resources. | `string` | `"us-east-1"` | no |
 | <a name="input_server_disk_size"></a> [server\_disk\_size](#input\_server\_disk\_size) | Disk size of the server in GiB. | `number` | `50` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | Name of the EC2 instance to be created. | `string` | n/a | yes |
@@ -40,5 +39,7 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Public IP of the server |
 <!-- END_TF_DOCS -->

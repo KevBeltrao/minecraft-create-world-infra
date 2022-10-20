@@ -24,7 +24,7 @@ func TestTerraform(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	public_ip := terraform.Output(t, terraformOptions, "public_ip")
-	is_valid_ip := isValidIPAddress(public_ip)
-	assert.Equal(t, is_valid_ip, true)
+	publicIP := terraform.Output(t, terraformOptions, "public_ip")
+	isValidIP := isValidIPAddress(publicIP)
+	assert.Equal(t, isValidIP, true)
 }

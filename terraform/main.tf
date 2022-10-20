@@ -1,5 +1,5 @@
 module "ec2" {
-  source = "git@github.com:terraform-aws-modules/terraform-aws-ec2-instance.git?ref=v4.1.4"
+  source = "github.com/terraform-aws-modules/terraform-aws-ec2-instance.git?ref=v4.1.4"
 
   name          = var.server_name
   ami           = data.aws_ami.this.id
@@ -26,7 +26,7 @@ resource "aws_eip" "this" {
 }
 
 module "sg" {
-  source = "git@github.com:terraform-aws-modules/terraform-aws-security-group.git?ref=v4.13.1"
+  source = "github.com/terraform-aws-modules/terraform-aws-security-group.git?ref=v4.13.1"
 
   name        = "minecraft-sg-${var.server_name}"
   description = "Allows players to connect to minecraft server ${var.server_name}"
