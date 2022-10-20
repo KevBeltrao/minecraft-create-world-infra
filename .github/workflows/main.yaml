@@ -45,7 +45,7 @@ jobs:
       - name: Automatically create a Markdown docs for Terraform
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: infrastructure
+          working-dir: terraform
           output-method: replace
           git-push: "true"
 
